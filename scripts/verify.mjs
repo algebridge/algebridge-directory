@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Pre-deploy verification for the Algebridge Library.
+ * Pre-deploy verification for the Algebridge Directory.
  *
  * Checks that are worth running before every deploy:
  *   1. Every internal link in dist/ points at a page that exists.

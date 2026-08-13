@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Algebridge Library — client behaviour
+   Algebridge Directory — client behaviour
    Search, filters, explanation tabs, and a saved/learned list kept entirely
    in localStorage. No network calls, no accounts, no tracking.
    ========================================================================== */
@@ -7,8 +7,8 @@
 (function () {
   "use strict";
 
-  var SAVED_KEY = "algebridge-library:saved";
-  var LEARNED_KEY = "algebridge-library:learned";
+  var SAVED_KEY = "algebridge-directory:saved";
+  var LEARNED_KEY = "algebridge-directory:learned";
 
   /* ---- storage ---------------------------------------------------------- */
 
@@ -106,7 +106,7 @@
       panelSimple.hidden = wantComplex;
       panelComplex.hidden = !wantComplex;
       try {
-        window.localStorage.setItem("algebridge-library:depth", wantComplex ? "complex" : "simple");
+        window.localStorage.setItem("algebridge-directory:depth", wantComplex ? "complex" : "simple");
       } catch (err) {
         /* preference simply will not persist */
       }
@@ -121,7 +121,7 @@
 
     // Remember which depth the reader prefers across topics.
     try {
-      if (window.localStorage.getItem("algebridge-library:depth") === "complex") select(true);
+      if (window.localStorage.getItem("algebridge-directory:depth") === "complex") select(true);
     } catch (err) {
       /* ignore */
     }

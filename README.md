@@ -1,4 +1,4 @@
-# Algebridge Library
+# Algebridge Directory
 
 A free directory of every topic from Pre-Algebra through Algebra 2. Each topic has a
 hand-picked video, a plain-English explanation, a rigorous explanation, a worked example,

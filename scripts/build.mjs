@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Static site generator for the Algebridge Library.
+ * Static site generator for the Algebridge Directory.
  *
  * Zero dependencies on purpose: `node scripts/build.mjs` produces a complete
  * static site in dist/ that any host can serve. Every topic gets a real HTML
@@ -18,12 +18,12 @@ const ROOT = path.join(__dirname, "..");
 const OUT = path.join(ROOT, "dist");
 
 export const SITE = {
-  name: "Algebridge Library",
-  short: "Library",
+  name: "Algebridge Directory",
+  short: "Directory",
   tagline: "Every topic from Pre-Algebra to Algebra 2, explained twice.",
   description:
     "A free directory of every Pre-Algebra, Algebra 1 and Algebra 2 topic. Each one has a hand-picked video, a plain-English explanation, a rigorous explanation, a worked example, and unlimited practice on AlgeBridge.",
-  url: "https://algebridge-library.vercel.app",
+  url: "https://algebridge-directory.vercel.app",
   practiceBase: "https://algebridge.vercel.app",
   org: "AlgeBridge",
   orgUrl: "https://algebridge.org",
@@ -162,7 +162,7 @@ ${extraHead}
 <header class="site-header">
   <div class="wrap">
     <div class="header-bar">
-      <a class="brand" href="/">${icon.logo}<span><span class="hide-sm">Algebridge </span><strong style="font-weight:700">Library</strong></span></a>
+      <a class="brand" href="/">${icon.logo}<span><span class="hide-sm">Algebridge </span><strong style="font-weight:700">Directory</strong></span></a>
       <nav class="header-nav" aria-label="Main">
         ${navLink("/", "Browse", "browse")}
         ${navLink("/courses/", "Courses", "courses")}
@@ -179,7 +179,7 @@ ${body}
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-about">
-        <a class="brand" href="/">${icon.logo}<span>Algebridge Library</span></a>
+        <a class="brand" href="/">${icon.logo}<span>Algebridge Directory</span></a>
         <p>A free directory of every topic from Pre-Algebra through Algebra 2. Built alongside <a href="${SITE.orgUrl}">${SITE.org}</a>, a student-led initiative.</p>
       </div>
       <div>
@@ -192,7 +192,7 @@ ${body}
         </ul>
       </div>
       <div>
-        <h4>Library</h4>
+        <h4>Directory</h4>
         <ul>
           <li><a href="/">Browse topics</a></li>
           <li><a href="/saved/">Saved</a></li>
@@ -372,7 +372,7 @@ function homePage(courses, topics, videos) {
 
 function coursesPage(courses, topics) {
   const body = `<div class="wrap">
-  <div class="breadcrumb"><a href="/">Library</a><span aria-hidden="true">/</span><span>Courses</span></div>
+  <div class="breadcrumb"><a href="/">Directory</a><span aria-hidden="true">/</span><span>Courses</span></div>
   <h1 class="detail-title">Three courses, ${topics.length} topics</h1>
   <p class="detail-lede">Work through a course in order, or jump to whatever is confusing right now. Nothing is locked and no account is required.</p>
   <div class="card-grid" style="margin-top:22px">
@@ -408,7 +408,7 @@ function coursePage(course, courses, topics, videos) {
   <section class="hero">
     <div class="hero-inner">
       <div>
-        <div class="breadcrumb" style="margin-top:0"><a href="/">Library</a><span aria-hidden="true">/</span><a href="/courses/">Courses</a><span aria-hidden="true">/</span><span>${esc(
+        <div class="breadcrumb" style="margin-top:0"><a href="/">Directory</a><span aria-hidden="true">/</span><a href="/courses/">Courses</a><span aria-hidden="true">/</span><span>${esc(
           course.title
         )}</span></div>
         <h1>${esc(course.title)}</h1>
@@ -475,7 +475,7 @@ function topicPage(topic, index, allTopics, videos, courses) {
 
   const body = `<div class="wrap">
   <div class="breadcrumb">
-    <a href="/">Library</a><span aria-hidden="true">/</span>
+    <a href="/">Directory</a><span aria-hidden="true">/</span>
     <a href="/${esc(topic.courseId)}/">${esc(topic.courseTitle)}</a><span aria-hidden="true">/</span>
     <a href="/${esc(topic.courseId)}/#${esc(topic.unitId)}">${esc(topic.unitTitle)}</a><span aria-hidden="true">/</span>
     <span>${esc(topic.title)}</span>
@@ -633,7 +633,7 @@ function topicPage(topic, index, allTopics, videos, courses) {
 
 function savedPage(courses) {
   const body = `<div class="wrap">
-  <div class="breadcrumb"><a href="/">Library</a><span aria-hidden="true">/</span><span>Saved</span></div>
+  <div class="breadcrumb"><a href="/">Directory</a><span aria-hidden="true">/</span><span>Saved</span></div>
   <h1 class="detail-title">Your saved topics</h1>
   <p class="detail-lede">Saved topics and the ones you have marked as learned live in this browser only. Nothing is uploaded and no account exists.</p>
 
@@ -708,7 +708,7 @@ function aboutPage(topics, videos, courses) {
     ),
   ].sort();
   const body = `<div class="wrap">
-  <div class="breadcrumb"><a href="/">Library</a><span aria-hidden="true">/</span><span>About</span></div>
+  <div class="breadcrumb"><a href="/">Directory</a><span aria-hidden="true">/</span><span>About</span></div>
   <div class="legal-layout">
     <nav class="legal-nav" aria-label="Sections">
       <a href="/about/" class="is-active">About</a>
@@ -718,7 +718,7 @@ function aboutPage(topics, videos, courses) {
       <a href="/privacy/">Privacy</a>
     </nav>
     <article class="legal-body">
-      <h1>About the Algebridge Library</h1>
+      <h1>About the Algebridge Directory</h1>
       <p class="updated">${topics.length} topics · ${
         Object.values(videos).filter((v) => !v.missing).length
       } verified videos · last built ${esc(SITE.updated)}</p>
@@ -729,7 +729,7 @@ function aboutPage(topics, videos, courses) {
         ${channels.map((c) => `<li>${esc(c)}</li>`).join("\n        ")}
       </ul>
       <p>Creators keep all rights to their work. Videos play through YouTube's privacy-enhanced player, and full credit with a direct link sits under every embed. See <a href="/copyright/">Copyright &amp; DMCA</a> if you are a creator and want an embed removed.</p>
-      <h2>What this library does not have</h2>
+      <h2>What this directory does not have</h2>
       <ul>
         <li>No accounts, and no way to create one.</li>
         <li>No user counts, testimonials or ratings — there is no user base to measure yet, and inventing figures would be dishonest.</li>
@@ -741,7 +741,7 @@ function aboutPage(topics, videos, courses) {
 </div>`;
   return layout({
     title: "About",
-    description: "How the Algebridge Library is built, where the videos come from, and what it deliberately does not do.",
+    description: "How the Algebridge Directory is built, where the videos come from, and what it deliberately does not do.",
     body,
     canonical: "/about/",
   });
@@ -751,7 +751,7 @@ function notFoundPage() {
   const body = `<div class="wrap">
   <div class="empty-state" style="margin-top:40px">
     <h3>That page does not exist</h3>
-    <p>The topic may have been renamed. Try browsing the library instead.</p>
+    <p>The topic may have been renamed. Try browsing the directory instead.</p>
     <p style="margin-top:16px"><a class="btn btn-primary" href="/">Browse all topics</a></p>
   </div>
 </div>`;

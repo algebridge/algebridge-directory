@@ -1,5 +1,5 @@
 /**
- * Legal and informational page content for the Algebridge Library.
+ * Legal and informational page content for the Algebridge Directory.
  *
  * These are written to describe what the site actually does — no accounts, no
  * analytics, no advertising, localStorage only, third-party embeds from
@@ -19,7 +19,7 @@ const notice = () => (SHOW_DRAFT_NOTICE ? DRAFT_NOTICE : "");
 
 export const ABOUT_PAGE = {
   html: `
-<p>The Algebridge Library is a free directory of every topic taught from Pre-Algebra through Algebra 2. It exists because the hardest part of getting unstuck in maths is usually not the maths. It is finding one clear explanation of the exact thing that is confusing, without wading through a forty-minute lecture or a page of adverts.</p>
+<p>The Algebridge Directory covers every topic taught from Pre-Algebra through Algebra 2, free and open to anyone. It exists because the hardest part of getting unstuck in maths is usually not the maths. It is finding one clear explanation of the exact thing that is confusing, without wading through a forty-minute lecture or a page of adverts.</p>
 
 <h2>Two explanations for every topic</h2>
 <p>Each topic carries both a plain-language explanation and a rigorous one, and you can switch between them on any page.</p>
@@ -27,7 +27,7 @@ export const ABOUT_PAGE = {
   <li><strong>Simple</strong> is what a patient friend would say out loud. No notation you have not met, concrete numbers, and the intuition that makes the rule feel inevitable rather than arbitrary.</li>
   <li><strong>In depth</strong> is the precise version. Proper names, general forms, the reason a rule holds, the edge cases, and where the idea reappears later in the sequence.</li>
 </ul>
-<p>Most sites pick one or the other. Picking one is what forces students to give up: the simple version leaves you unable to answer the exam question, and the rigorous version is unreadable when you are already lost. Having both, one click apart, is the entire point of this library.</p>
+<p>Most sites pick one or the other. Picking one is what forces students to give up: the simple version leaves you unable to answer the exam question, and the rigorous version is unreadable when you are already lost. Having both, one click apart, is the entire point of this directory.</p>
 
 <h2>What is on every topic page</h2>
 <ul>
@@ -39,7 +39,7 @@ export const ABOUT_PAGE = {
 </ul>
 
 <h2>Practice</h2>
-<p>This library explains. It does not drill. Practice happens on <a href="https://algebridge.vercel.app" target="_blank" rel="noopener">AlgeBridge</a>, which generates fresh problems rather than serving a fixed set, so a topic never runs out. Where AlgeBridge has a skill matching the topic you are reading, the practice button opens that exact skill. Where it does not yet, the button opens the platform and the page says so rather than pretending the deep link exists.</p>
+<p>This directory explains. It does not drill. Practice happens on <a href="https://algebridge.vercel.app" target="_blank" rel="noopener">AlgeBridge</a>, which generates fresh problems rather than serving a fixed set, so a topic never runs out. Where AlgeBridge has a skill matching the topic you are reading, the practice button opens that exact skill. Where it does not yet, the button opens the platform and the page says so rather than pretending the deep link exists.</p>
 `,
 };
 
@@ -50,24 +50,24 @@ export const LEGAL_PAGES = [
     navTitle: "Terms of Service",
     effective: "13 August 2026",
     description:
-      "The terms governing use of the Algebridge Library, a free educational directory.",
+      "The terms governing use of the Algebridge Directory, a free educational resource.",
     html: `
 ${notice()}
-<p>These Terms of Service (the “Terms”) govern your access to and use of the Algebridge Library at this website (the “Library”). The Library is operated by AlgeBridge, a student-led educational initiative (“we”, “us”). By using the Library you agree to these Terms. If you do not agree, please do not use the Library.</p>
+<p>These Terms of Service (the “Terms”) govern your access to and use of the Algebridge Directory at this website (the “Directory”). The Directory is operated by AlgeBridge, a student-led educational initiative (“we”, “us”). By using the Directory you agree to these Terms. If you do not agree, please do not use the Directory.</p>
 
-<h2>1. What the Library is</h2>
-<p>The Library is a free, publicly available directory of mathematics topics covering Pre-Algebra, Algebra 1 and Algebra 2. Each topic page contains written explanations, a worked example, a list of common mistakes, an embedded third-party video, and a link to a separate practice platform.</p>
-<p>The Library is an educational reference. It is not a school, not a tutoring service, not a certification programme, and not a substitute for instruction from a qualified teacher.</p>
+<h2>1. What the Directory is</h2>
+<p>The Directory is a free, publicly available catalogue of mathematics topics covering Pre-Algebra, Algebra 1 and Algebra 2. Each topic page contains written explanations, a worked example, a list of common mistakes, an embedded third-party video, and a link to a separate practice platform.</p>
+<p>The Directory is an educational reference. It is not a school, not a tutoring service, not a certification programme, and not a substitute for instruction from a qualified teacher.</p>
 
 <h2>2. No account, no charge</h2>
-<p>The Library requires no account, no registration and no payment. We do not sell anything through the Library, do not display advertising, and do not operate a subscription of any kind. Any feature that appears to remember you — saved topics, topics marked as learned, your preferred explanation depth — is stored in your own browser and is described in the <a href="/privacy/">Privacy Policy</a>.</p>
+<p>The Directory requires no account, no registration and no payment. We do not sell anything through the Directory, do not display advertising, and do not operate a subscription of any kind. Any feature that appears to remember you — saved topics, topics marked as learned, your preferred explanation depth — is stored in your own browser and is described in the <a href="/privacy/">Privacy Policy</a>.</p>
 
 <h2>3. Permitted use</h2>
-<p>You may read, share and link to the Library freely. You may use it for personal study, in a classroom, in tutoring, or in a homework help setting, at no charge and without seeking permission.</p>
+<p>You may read, share and link to the Directory freely. You may use it for personal study, in a classroom, in tutoring, or in a homework help setting, at no charge and without seeking permission.</p>
 <p>You may not:</p>
 <ul>
   <li>Copy the written explanations wholesale and republish them as your own work.</li>
-  <li>Sell access to the Library or to its content.</li>
+  <li>Sell access to the Directory or to its content.</li>
   <li>Attempt to interfere with, overload or gain unauthorised access to the site or the systems that serve it.</li>
   <li>Use automated tools to scrape the site at a rate that degrades it for other users.</li>
   <li>Remove, obscure or alter any attribution to a video creator.</li>
@@ -75,34 +75,34 @@ ${notice()}
 
 <h2>4. Intellectual property</h2>
 <h3>Our content</h3>
-<p>The written explanations, worked examples, mistake lists, page structure, code and design of the Library are our original work and remain our property. Mathematical facts themselves are not owned by anyone; our particular expression of them is.</p>
-<p>You may quote short passages for non-commercial educational purposes with attribution to the Algebridge Library and a link back to the page quoted.</p>
+<p>The written explanations, worked examples, mistake lists, page structure, code and design of the Directory are our original work and remain our property. Mathematical facts themselves are not owned by anyone; our particular expression of them is.</p>
+<p>You may quote short passages for non-commercial educational purposes with attribution to the Algebridge Directory and a link back to the page quoted.</p>
 <h3>Third-party video content</h3>
-<p>Every video on the Library is embedded from YouTube and was created by, and remains the property of, its respective creator. We do not host, upload, modify, monetise or claim any ownership of that content. Each embed credits the channel by name and links to the original video. See <a href="/copyright/">Copyright &amp; DMCA</a> for takedown requests.</p>
+<p>Every video on the Directory is embedded from YouTube and was created by, and remains the property of, its respective creator. We do not host, upload, modify, monetise or claim any ownership of that content. Each embed credits the channel by name and links to the original video. See <a href="/copyright/">Copyright &amp; DMCA</a> for takedown requests.</p>
 
 <h2>5. Accuracy and no warranty</h2>
-<p>The explanations are written carefully and checked, but the Library is provided “as is” and “as available”, without warranties of any kind, express or implied, including any implied warranties of merchantability, fitness for a particular purpose, accuracy or non-infringement.</p>
+<p>The explanations are written carefully and checked, but the Directory is provided “as is” and “as available”, without warranties of any kind, express or implied, including any implied warranties of merchantability, fitness for a particular purpose, accuracy or non-infringement.</p>
 <p>Mathematics content can contain errors, and curricula differ between schools, districts and countries. Your teacher's conventions take precedence over ours for the purposes of your coursework. If you find an error, please tell us — see <a href="/contact/">Contact</a>.</p>
-<p>We do not warrant that the Library will be uninterrupted, error-free, or that third-party videos will remain available. Videos are verified at build time as public and embeddable, but a creator may remove or restrict a video at any time thereafter, which is outside our control.</p>
+<p>We do not warrant that the Directory will be uninterrupted, error-free, or that third-party videos will remain available. Videos are verified at build time as public and embeddable, but a creator may remove or restrict a video at any time thereafter, which is outside our control.</p>
 
 <h2>6. Third-party links and services</h2>
-<p>The Library links to and embeds services we do not control, including YouTube and the AlgeBridge practice platform. Your use of those services is governed by their own terms and privacy policies, not these Terms. We are not responsible for third-party content, availability or practices.</p>
+<p>The Directory links to and embeds services we do not control, including YouTube and the AlgeBridge practice platform. Your use of those services is governed by their own terms and privacy policies, not these Terms. We are not responsible for third-party content, availability or practices.</p>
 
 <h2>7. Limitation of liability</h2>
-<p>To the fullest extent permitted by law, we will not be liable for any indirect, incidental, special, consequential or punitive damages, or any loss of data, academic outcome, opportunity or profit, arising from your use of or inability to use the Library — including any reliance on its content. Because the Library is provided free of charge, our total aggregate liability arising from or relating to the Library will not exceed one hundred United States dollars (US$100).</p>
+<p>To the fullest extent permitted by law, we will not be liable for any indirect, incidental, special, consequential or punitive damages, or any loss of data, academic outcome, opportunity or profit, arising from your use of or inability to use the Directory — including any reliance on its content. Because the Directory is provided free of charge, our total aggregate liability arising from or relating to the Directory will not exceed one hundred United States dollars (US$100).</p>
 <p>Nothing in these Terms excludes or limits liability that cannot lawfully be excluded or limited, including liability for death or personal injury caused by negligence, or for fraud.</p>
 
 <h2>8. Users under 18</h2>
-<p>The Library is designed to be safe for students of school age. It collects no personal information, requires no account and contains no advertising. If you are under 18, you may use the Library, and we encourage you to review the <a href="/privacy/">Privacy Policy</a> with a parent, guardian or teacher so that everyone understands the third-party embeds described there.</p>
+<p>The Directory is designed to be safe for students of school age. It collects no personal information, requires no account and contains no advertising. If you are under 18, you may use the Directory, and we encourage you to review the <a href="/privacy/">Privacy Policy</a> with a parent, guardian or teacher so that everyone understands the third-party embeds described there.</p>
 
 <h2>9. Changes</h2>
-<p>We may update these Terms as the Library changes. The “last updated” date at the top of this page will always reflect the current version. Material changes will be summarised at the top of this page for a reasonable period. Continued use after a change constitutes acceptance of the revised Terms.</p>
+<p>We may update these Terms as the Directory changes. The “last updated” date at the top of this page will always reflect the current version. Material changes will be summarised at the top of this page for a reasonable period. Continued use after a change constitutes acceptance of the revised Terms.</p>
 
 <h2>10. Termination</h2>
-<p>We may modify, suspend or discontinue the Library, in whole or in part, at any time and without notice. Because there are no accounts, there is nothing to terminate on your side; clearing your browser storage removes everything the Library has kept.</p>
+<p>We may modify, suspend or discontinue the Directory, in whole or in part, at any time and without notice. Because there are no accounts, there is nothing to terminate on your side; clearing your browser storage removes everything the Directory has kept.</p>
 
 <h2>11. Governing law</h2>
-<p>These Terms are governed by the laws of the jurisdiction in which AlgeBridge is established, without regard to conflict-of-law principles. The specific governing jurisdiction and venue are pending confirmation and will be stated here before the Library is promoted publicly.</p>
+<p>These Terms are governed by the laws of the jurisdiction in which AlgeBridge is established, without regard to conflict-of-law principles. The specific governing jurisdiction and venue are pending confirmation and will be stated here before the Directory is promoted publicly.</p>
 
 <h2>12. Contact</h2>
 <p>Questions about these Terms can be sent through the details on the <a href="/contact/">Contact</a> page.</p>
@@ -114,10 +114,10 @@ ${notice()}
     navTitle: "Privacy Policy",
     effective: "13 August 2026",
     description:
-      "What the Algebridge Library stores (almost nothing), what stays on your device, and which third parties are involved.",
+      "What the Algebridge Directory stores (almost nothing), what stays on your device, and which third parties are involved.",
     html: `
 ${notice()}
-<p>This policy explains what happens to information when you use the Algebridge Library. It is written to be accurate rather than reassuring, so it names the two third parties that are involved even though we would rather the answer were simply “nobody”.</p>
+<p>This policy explains what happens to information when you use the Algebridge Directory. It is written to be accurate rather than reassuring, so it names the two third parties that are involved even though we would rather the answer were simply “nobody”.</p>
 
 <h2>Summary</h2>
 <ul>
@@ -128,20 +128,20 @@ ${notice()}
 </ul>
 
 <h2>1. Information we collect</h2>
-<p>None directly. The Library has no sign-up, no contact form, no comments, no newsletter and no analytics script. We do not maintain a database of users because there are no users to maintain — the site is a set of static files.</p>
+<p>None directly. The Directory has no sign-up, no contact form, no comments, no newsletter and no analytics script. We do not maintain a database of users because there are no users to maintain — the site is a set of static files.</p>
 
 <h2>2. Information stored on your device</h2>
-<p>The Library uses your browser's <code>localStorage</code>, which is storage on your own computer or phone that we cannot read remotely. Three items may be written:</p>
+<p>The Directory uses your browser's <code>localStorage</code>, which is storage on your own computer or phone that we cannot read remotely. Three items may be written:</p>
 <table>
   <thead><tr><th>Key</th><th>What it holds</th><th>Why</th></tr></thead>
   <tbody>
-    <tr><td><code>algebridge-library:saved</code></td><td>A list of topic names you bookmarked</td><td>To show them on the Saved page</td></tr>
-    <tr><td><code>algebridge-library:learned</code></td><td>A list of topic names you marked as learned</td><td>To track your own progress</td></tr>
-    <tr><td><code>algebridge-library:depth</code></td><td>Either “simple” or “complex”</td><td>To open topics at your preferred depth</td></tr>
+    <tr><td><code>algebridge-directory:saved</code></td><td>A list of topic names you bookmarked</td><td>To show them on the Saved page</td></tr>
+    <tr><td><code>algebridge-directory:learned</code></td><td>A list of topic names you marked as learned</td><td>To track your own progress</td></tr>
+    <tr><td><code>algebridge-directory:depth</code></td><td>Either “simple” or “complex”</td><td>To open topics at your preferred depth</td></tr>
   </tbody>
 </table>
 <p>These contain no personal information, expire only when you clear them, and are specific to the browser you are using — they do not follow you to another device. You can erase all of them at any time by clearing site data in your browser settings. See the <a href="/cookies/">Cookies &amp; Local Storage</a> page for instructions.</p>
-<p>The Library sets no cookies of its own.</p>
+<p>The Directory sets no cookies of its own.</p>
 
 <h2>3. Third parties</h2>
 <h3>Google Fonts</h3>
@@ -155,7 +155,7 @@ ${notice()}
 <p>Practice links open <code>algebridge.vercel.app</code>, a separate product with its own accounts and its own privacy policy. Once you follow that link you are on a different site and this policy no longer applies.</p>
 
 <h2>4. Children's privacy</h2>
-<p>The Library is intended for school-age students and is likely to be used by children under 13. We have designed it so that no personal information is collected from anyone, of any age: there is no registration, no contact form, no messaging, no advertising and no analytics.</p>
+<p>The Directory is intended for school-age students and is likely to be used by children under 13. We have designed it so that no personal information is collected from anyone, of any age: there is no registration, no contact form, no messaging, no advertising and no analytics.</p>
 <p>Because we collect no personal information, there is nothing for a parent to request, correct or delete from us. Local browser storage can be cleared by the child, a parent or a teacher at any time. If you believe a child has somehow provided personal information to us, please contact us and we will investigate and delete anything found.</p>
 <p>Parents and educators should be aware of the YouTube embed described above, since pressing play involves a Google service. Schools with strict requirements may prefer to use the written explanations only, which require no interaction with YouTube.</p>
 
@@ -163,7 +163,7 @@ ${notice()}
 <p>Data protection laws including the GDPR and the CCPA give you rights over personal data held about you. Since we hold none, there is nothing for us to disclose, correct, port or erase. We do not sell or share personal information — there is none to sell, and we would not sell it if there were. Requests relating to data held by Google as a result of the font or video embeds must be directed to Google.</p>
 
 <h2>6. Security</h2>
-<p>The Library is a static site served over HTTPS, with no database and no user data at rest, which removes most categories of breach risk by construction. No system is perfectly secure, but there is no store of personal information here to compromise.</p>
+<p>The Directory is a static site served over HTTPS, with no database and no user data at rest, which removes most categories of breach risk by construction. No system is perfectly secure, but there is no store of personal information here to compromise.</p>
 
 <h2>7. Changes to this policy</h2>
 <p>If the site ever adds something that collects information — analytics, a contact form, accounts — this policy will be updated before that feature ships, and the change will be summarised at the top of this page. The date at the top always reflects the current version.</p>
@@ -177,16 +177,16 @@ ${notice()}
     title: "Cookies & Local Storage",
     navTitle: "Cookies",
     description:
-      "The Algebridge Library sets no cookies of its own. Here is exactly what it does store and how to clear it.",
+      "The Algebridge Directory sets no cookies of its own. Here is exactly what it does store and how to clear it.",
     html: `
 <p>Short version: this site sets <strong>no cookies of its own</strong>, and shows no cookie banner because there is nothing to consent to. It does use local storage for three small preferences, and it embeds YouTube videos which may set cookies once you press play.</p>
 
 <h2>What we store</h2>
 <p>Three items in <code>localStorage</code>, all optional and all created only if you use the relevant feature:</p>
 <ul>
-  <li><code>algebridge-library:saved</code> — topics you bookmarked.</li>
-  <li><code>algebridge-library:learned</code> — topics you marked as learned.</li>
-  <li><code>algebridge-library:depth</code> — whether you prefer the simple or in-depth explanation.</li>
+  <li><code>algebridge-directory:saved</code> — topics you bookmarked.</li>
+  <li><code>algebridge-directory:learned</code> — topics you marked as learned.</li>
+  <li><code>algebridge-directory:depth</code> — whether you prefer the simple or in-depth explanation.</li>
 </ul>
 <p>Local storage differs from cookies in one way that matters here: it is never attached to network requests, so this data is not transmitted to us or to anyone else. It sits on your device until cleared.</p>
 
@@ -216,17 +216,17 @@ ${notice()}
     title: "Copyright & DMCA",
     navTitle: "Copyright & DMCA",
     description:
-      "How the Algebridge Library handles third-party video, attribution, and takedown requests from creators.",
+      "How the Algebridge Directory handles third-party video, attribution, and takedown requests from creators.",
     html: `
 ${notice()}
 <p>This page explains what we own, what we do not, and how a creator or rights holder can have material removed.</p>
 
 <h2>Videos are embedded, not hosted</h2>
-<p>Every video in the Library is embedded from YouTube using YouTube's standard, publicly available embed player. This means:</p>
+<p>Every video in the Directory is embedded from YouTube using YouTube's standard, publicly available embed player. This means:</p>
 <ul>
   <li>We do not host any video file. Nothing is uploaded to, copied onto or stored on our servers.</li>
   <li>We do not modify, re-encode, crop, re-upload or strip branding from any video.</li>
-  <li>We do not monetise embedded videos and run no advertising anywhere on the Library. Any advertising you see inside a player is served by YouTube, and the revenue relationship is between YouTube and the creator, exactly as it would be on YouTube itself.</li>
+  <li>We do not monetise embedded videos and run no advertising anywhere on the Directory. Any advertising you see inside a player is served by YouTube, and the revenue relationship is between YouTube and the creator, exactly as it would be on YouTube itself.</li>
   <li>Every embed names the channel and links to the original video on YouTube.</li>
   <li>Playback statistics accrue to the creator's own YouTube analytics, as with any embed.</li>
 </ul>
@@ -260,7 +260,7 @@ ${notice()}
     title: "Accessibility",
     navTitle: "Accessibility",
     description:
-      "What the Algebridge Library does to stay usable for everyone, and what is not yet done.",
+      "What the Algebridge Directory does to stay usable for everyone, and what is not yet done.",
     html: `
 <p>Students who need assistive technology are exactly the students least well served by most maths sites. This page states what has been done and, more usefully, what has not.</p>
 
@@ -291,7 +291,7 @@ ${notice()}
 </ul>
 
 <h2>Telling us about a problem</h2>
-<p>If something on the Library is unusable for you, please say so through the <a href="/contact/">Contact</a> page. Describe the page and what happened. Accessibility reports are treated as bugs, not as feature requests, and are prioritised accordingly.</p>
+<p>If something on the Directory is unusable for you, please say so through the <a href="/contact/">Contact</a> page. Describe the page and what happened. Accessibility reports are treated as bugs, not as feature requests, and are prioritised accordingly.</p>
 `,
   },
   {
@@ -299,9 +299,9 @@ ${notice()}
     title: "Educational Disclaimer",
     navTitle: "Disclaimer",
     description:
-      "What the Algebridge Library is for, what it is not, and the limits of relying on it.",
+      "What the Algebridge Directory is for, what it is not, and the limits of relying on it.",
     html: `
-<p>The Library is a study aid. This page sets out plainly what that does and does not mean.</p>
+<p>The Directory is a study aid. This page sets out plainly what that does and does not mean.</p>
 
 <h2>It is not a substitute for your teacher</h2>
 <p>Curricula vary between countries, states, districts and individual classrooms. Notation, preferred methods, rounding conventions and even the definition of a term can differ from what you see here. Where this site and your teacher disagree, follow your teacher — they are marking your work.</p>
@@ -311,28 +311,28 @@ ${notice()}
 <p>Do not rely on this site as the sole source for anything consequential — a graded assessment, a standardised test, or a professional calculation — without checking it against your own materials.</p>
 
 <h2>No guarantee of results</h2>
-<p>Using this Library will not guarantee any particular grade, test score, placement or outcome. Learning depends on far more than the quality of an explanation, and we make no claims about how much anyone's results will improve. We also publish no statistics about student outcomes, because we have not measured any and inventing them would be dishonest.</p>
+<p>Using this Directory will not guarantee any particular grade, test score, placement or outcome. Learning depends on far more than the quality of an explanation, and we make no claims about how much anyone's results will improve. We also publish no statistics about student outcomes, because we have not measured any and inventing them would be dishonest.</p>
 
 <h2>Third-party videos</h2>
 <p>Videos are made by independent creators and are chosen because they explain a topic well. We do not control their content and have not verified every statement in every video. A creator's approach, notation or emphasis may differ from the written explanation on the same page. Neither is “wrong”; if they conflict in a way that matters, trust your course materials.</p>
 
 <h2>Academic integrity</h2>
-<p>This Library is designed to help you understand a topic, which is why every page leads with an explanation rather than an answer. Using it to learn is exactly the point. Copying a worked example as your own submitted work, or using it during an assessment where outside resources are not permitted, is your responsibility and may violate your school's academic integrity policy.</p>
+<p>This Directory is designed to help you understand a topic, which is why every page leads with an explanation rather than an answer. Using it to learn is exactly the point. Copying a worked example as your own submitted work, or using it during an assessment where outside resources are not permitted, is your responsibility and may violate your school's academic integrity policy.</p>
 
 <h2>Availability</h2>
-<p>The Library is provided free and without any commitment to remain available, at a particular address, or in its current form. Third-party videos may be removed by their creators at any time without notice to us.</p>
+<p>The Directory is provided free and without any commitment to remain available, at a particular address, or in its current form. Third-party videos may be removed by their creators at any time without notice to us.</p>
 `,
   },
   {
     slug: "contact",
     title: "Contact",
     navTitle: "Contact",
-    description: "How to report an error, request a video takedown, or ask about the Algebridge Library.",
+    description: "How to report an error, request a video takedown, or ask about the Algebridge Directory.",
     html: `
-<p>The Library has no contact form, because a form would mean collecting and storing your details, and the <a href="/privacy/">Privacy Policy</a> would then have to say so. Email is simpler and leaves you in control of what you send.</p>
+<p>The Directory has no contact form, because a form would mean collecting and storing your details, and the <a href="/privacy/">Privacy Policy</a> would then have to say so. Email is simpler and leaves you in control of what you send.</p>
 
 <h2>Reaching us</h2>
-<p>Correspondence goes to the AlgeBridge initiative, whose main site is <a href="https://algebridge.org">algebridge.org</a>. A dedicated address for the Library is being set up and will be published here before the site is promoted publicly.</p>
+<p>Correspondence goes to the AlgeBridge initiative, whose main site is <a href="https://algebridge.org">algebridge.org</a>. A dedicated address for the Directory is being set up and will be published here before the site is promoted publicly.</p>
 
 <h2>What to include</h2>
 <h3>Reporting a mistake in an explanation</h3>
@@ -342,10 +342,10 @@ ${notice()}
 <h3>Accessibility problems</h3>
 <p>Describe the page, the assistive technology you are using and what happened. These are treated as bugs. See <a href="/accessibility/">Accessibility</a> for what is already known.</p>
 <h3>Teachers and schools</h3>
-<p>The Library is free to use in class, to link from a course page, or to print from, with no permission needed and no licence to sign. If your school's filtering blocks YouTube, note that every topic is complete as written text without the video.</p>
+<p>The Directory is free to use in class, to link from a course page, or to print from, with no permission needed and no licence to sign. If your school's filtering blocks YouTube, note that every topic is complete as written text without the video.</p>
 
 <h2>What we cannot help with</h2>
-<p>We cannot provide individual tutoring, answer homework questions by email, or check your work. There is no support team here. The Library and the practice platform are the help we can offer.</p>
+<p>We cannot provide individual tutoring, answer homework questions by email, or check your work. There is no support team here. The Directory and the practice platform are the help we can offer.</p>
 `,
   },
 ];

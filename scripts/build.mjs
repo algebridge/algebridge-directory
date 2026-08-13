@@ -238,7 +238,10 @@ ${body}
 /* components                                                                  */
 /* -------------------------------------------------------------------------- */
 
-function topicCard(topic, video) {
+/** Numeric rank so "easiest first" can sort without string comparisons. */
+const LEVEL_RANK = { Intro: 1, Core: 2, Advanced: 3 };
+
+function topicCard(topic, video, order = 0) {
   const url = `/topic/${topic.slug}/`;
   const thumb = video
     ? `<a class="thumb" href="${url}" aria-label="${esc(topic.title)}">
@@ -251,6 +254,8 @@ function topicCard(topic, video) {
   return `<article class="topic-card" data-topic="${esc(topic.slug)}" data-course="${esc(
     topic.courseId
   )}" data-level="${esc(topic.level)}" data-unit="${esc(topic.unitId)}"
+    data-order="${order}" data-rank="${LEVEL_RANK[topic.level] || 2}"
+    data-title="${esc(topic.title.toLowerCase())}"
     data-search="${esc(
       [topic.title, topic.summary, topic.unitTitle, topic.courseTitle, (topic.tags || []).join(" ")]
         .join(" ")
@@ -296,7 +301,29 @@ function finderBar(courses, { activeCourse = "all", topicCount = 0 } = {}) {
   <div class="pill-row" role="group" aria-label="Filter by course">
     ${pill("all", "All")}
     ${courses.map((c) => pill(c.id, c.short)).join("\n    ")}
-    <button class="pill" type="button" data-filter-level="all" data-level-cycle>Level: All</button>
+  </div>
+  <div class="select-row">
+    <label class="select-pill">
+      <span>Level</span>
+      <select data-level-select>
+        <option value="all">All levels</option>
+        <option value="Intro">Intro</option>
+        <option value="Core">Core</option>
+        <option value="Advanced">Advanced</option>
+      </select>
+    </label>
+    <label class="select-pill">
+      <span>Sort</span>
+      <select data-sort>
+        <option value="curriculum">Curriculum order</option>
+        <option value="az">Topic A–Z</option>
+        <option value="za">Topic Z–A</option>
+        <option value="easiest">Easiest first</option>
+        <option value="hardest">Hardest first</option>
+      </select>
+    </label>
+    <span class="result-pill" data-result-count>${topicCount} topics</span>
+    <button class="pill pill-reset" type="button" data-reset hidden>Clear filters</button>
   </div>
 </div>`;
 }
@@ -341,6 +368,20 @@ function homePage(courses, topics, videos) {
     ${stripNav(courses)}
   </section>
 
+  <div class="section-head">
+    <h2>All topics</h2>
+    <span class="muted" data-result-count>${topics.length} topics</span>
+  </div>
+
+  <div class="card-grid" id="topic-grid">
+    ${topics.map((t, i) => topicCard(t, videos[t.slug], i)).join("\n")}
+    <div class="empty-state" data-empty hidden>
+      <h3 data-empty-title>No topics match that search</h3>
+      <p data-empty-body>Try a shorter word, or clear the filters to see all ${topics.length} topics.</p>
+      <p style="margin-top:14px"><button class="btn btn-primary" type="button" data-reset>Clear filters</button></p>
+    </div>
+  </div>
+
   <div class="banner">
     <div class="banner-icon">${icon.spark}</div>
     <div>
@@ -348,19 +389,6 @@ function homePage(courses, topics, videos) {
       <p>${practiceReady} topics link straight to a matching skill on AlgeBridge, where problems are generated fresh every time.</p>
     </div>
     <a class="btn btn-primary banner-action" href="${SITE.practiceBase}" target="_blank" rel="noopener">Open AlgeBridge</a>
-  </div>
-
-  <div class="section-head">
-    <h2>All topics</h2>
-    <span class="muted" data-result-count>${topics.length} topics</span>
-  </div>
-
-  <div class="card-grid" id="topic-grid">
-    ${topics.map((t) => topicCard(t, videos[t.slug])).join("\n")}
-    <div class="empty-state" data-empty hidden>
-      <h3>No topics match that search</h3>
-      <p>Try a shorter word, or clear the filters to see all ${topics.length} topics.</p>
-    </div>
   </div>
 </div>`;
 

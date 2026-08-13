@@ -134,15 +134,66 @@
     var searchInput = document.getElementById("topic-search");
     var cards = Array.prototype.slice.call(grid.querySelectorAll("[data-topic]"));
     var empty = grid.querySelector("[data-empty]");
-    var counter = document.querySelector("[data-result-count]");
-    var levelBtn = document.querySelector("[data-level-cycle]");
-    var LEVELS = ["all", "Intro", "Core", "Advanced"];
+    var counters = document.querySelectorAll("[data-result-count]");
+    var levelSelect = document.querySelector("[data-level-select]");
+    var sortSelect = document.querySelector("[data-sort]");
+    var resetButtons = document.querySelectorAll("[data-reset]");
+    var emptyTitle = document.querySelector("[data-empty-title]");
+    var emptyBody = document.querySelector("[data-empty-body]");
 
-    var state = { query: "", course: "all", level: "all" };
+    var state = { query: "", course: "all", level: "all", sort: "curriculum" };
+
+    var courseLabel = function (id) {
+      var btn = document.querySelector('[data-filter-course="' + id + '"]');
+      return btn ? btn.textContent.trim() : id;
+    };
+
+    var num = function (card, attr) {
+      return parseInt(card.getAttribute(attr), 10) || 0;
+    };
+
+    /**
+     * Reorders the cards in the DOM. Ties fall back to curriculum order so the
+     * result is stable and predictable rather than dependent on sort internals.
+     */
+    function sortCards() {
+      var mode = state.sort;
+      if (mode === "curriculum" && grid.getAttribute("data-sorted") === "curriculum") return;
+
+      var ordered = cards.slice().sort(function (a, b) {
+        switch (mode) {
+          case "az":
+            return a.getAttribute("data-title").localeCompare(b.getAttribute("data-title"));
+          case "za":
+            return b.getAttribute("data-title").localeCompare(a.getAttribute("data-title"));
+          case "easiest":
+            return num(a, "data-rank") - num(b, "data-rank") || num(a, "data-order") - num(b, "data-order");
+          case "hardest":
+            return num(b, "data-rank") - num(a, "data-rank") || num(a, "data-order") - num(b, "data-order");
+          default:
+            return num(a, "data-order") - num(b, "data-order");
+        }
+      });
+
+      var frag = document.createDocumentFragment();
+      ordered.forEach(function (card) {
+        frag.appendChild(card);
+      });
+      // Insert before the empty state so it stays the last child.
+      grid.insertBefore(frag, empty || null);
+      grid.setAttribute("data-sorted", mode);
+    }
+
+    function describeFilters() {
+      var bits = [];
+      if (state.course !== "all") bits.push(courseLabel(state.course));
+      if (state.level !== "all") bits.push(state.level + " level");
+      if (state.query.trim()) bits.push('"' + state.query.trim() + '"');
+      return bits;
+    }
 
     function apply() {
-      var q = state.query.trim().toLowerCase();
-      var words = q ? q.split(/\s+/) : [];
+      var words = state.query.trim().toLowerCase().split(/\s+/).filter(Boolean);
       var shown = 0;
 
       cards.forEach(function (card) {
@@ -159,8 +210,57 @@
         if (visible) shown++;
       });
 
+      sortCards();
+
       if (empty) empty.hidden = shown !== 0;
-      if (counter) counter.textContent = shown === 1 ? "1 topic" : shown + " topics";
+      var label = shown === 1 ? "1 topic" : shown + " topics";
+      for (var i = 0; i < counters.length; i++) counters[i].textContent = label;
+
+      var active = describeFilters();
+      for (var j = 0; j < resetButtons.length; j++) {
+        if (resetButtons[j].hasAttribute("hidden") === (active.length > 0)) {
+          if (active.length) resetButtons[j].removeAttribute("hidden");
+          else resetButtons[j].setAttribute("hidden", "");
+        }
+      }
+
+      // Say *why* nothing matched. Some combinations are genuinely empty —
+      // there are no Advanced topics in Pre-Algebra, for instance.
+      if (shown === 0 && emptyTitle && emptyBody) {
+        if (state.course !== "all" && state.level !== "all" && !words.length) {
+          emptyTitle.textContent =
+            "No " + state.level + " topics in " + courseLabel(state.course);
+          emptyBody.textContent =
+            "That combination is empty — " +
+            courseLabel(state.course) +
+            " has no topics at " +
+            state.level +
+            " level. Try another level, or clear the filters.";
+        } else {
+          emptyTitle.textContent = "No topics match";
+          emptyBody.textContent =
+            "Nothing matches " + active.join(" + ") + ". Try a shorter search or clear the filters.";
+        }
+      }
+    }
+
+    /**
+     * Bring the results into view, but only when they are off-screen. This is
+     * an enhancement, not the feedback mechanism — the result count next to
+     * the controls updates either way, so the page still responds visibly if
+     * scrolling is unavailable or the user prefers reduced motion.
+     */
+    function revealResults() {
+      var top = grid.getBoundingClientRect().top;
+      if (top <= window.innerHeight * 0.5 && top >= 0) return;
+      var y = top + window.pageYOffset - 88; // clear the sticky header
+      var calm =
+        window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      try {
+        window.scrollTo({ top: y, behavior: calm ? "auto" : "smooth" });
+      } catch (err) {
+        window.scrollTo(0, y); // older browsers reject the options object
+      }
     }
 
     if (searchInput) {
@@ -168,12 +268,16 @@
         state.query = searchInput.value;
         apply();
       });
-      // Escape clears the field rather than only blurring it.
       searchInput.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
           searchInput.value = "";
           state.query = "";
           apply();
+        }
+        // Enter jumps to the results rather than submitting anything.
+        if (event.key === "Enter") {
+          event.preventDefault();
+          revealResults();
         }
       });
     }
@@ -185,19 +289,44 @@
           other.classList.toggle("is-active", other === btn);
         });
         apply();
+        revealResults();
       });
     });
 
-    if (levelBtn) {
-      levelBtn.addEventListener("click", function () {
-        var next = LEVELS[(LEVELS.indexOf(state.level) + 1) % LEVELS.length];
-        state.level = next;
-        levelBtn.textContent = "Level: " + (next === "all" ? "All" : next);
-        levelBtn.classList.toggle("is-active", next !== "all");
+    if (levelSelect) {
+      levelSelect.addEventListener("change", function () {
+        state.level = levelSelect.value;
         apply();
+        revealResults();
       });
     }
 
+    if (sortSelect) {
+      sortSelect.addEventListener("change", function () {
+        state.sort = sortSelect.value;
+        apply();
+        revealResults();
+      });
+    }
+
+    resetButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        state.query = "";
+        state.course = "all";
+        state.level = "all";
+        if (searchInput) searchInput.value = "";
+        if (levelSelect) levelSelect.value = "all";
+        document.querySelectorAll("[data-filter-course]").forEach(function (other) {
+          other.classList.toggle(
+            "is-active",
+            other.getAttribute("data-filter-course") === "all"
+          );
+        });
+        apply();
+      });
+    });
+
+    grid.setAttribute("data-sorted", "curriculum");
     apply();
   }
 

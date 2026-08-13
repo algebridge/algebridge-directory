@@ -353,6 +353,75 @@ img {
 .pill:hover {
   color: var(--ink);
 }
+/* Sort + level row. Native selects so every option is visible at a glance,
+   which the old cycle-through button hid. */
+.select-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+}
+
+.select-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 6px 0 14px;
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-flat);
+  cursor: pointer;
+}
+.select-pill:focus-within {
+  border-color: var(--bridge-500);
+  box-shadow: 0 0 0 3px var(--bridge-100);
+}
+.select-pill > span {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+}
+.select-pill select {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0 26px 0 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238a827c' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+}
+
+.result-pill {
+  font-size: 14px;
+  color: var(--ink-faint);
+  font-weight: 500;
+  padding: 0 4px;
+}
+
+.pill-reset {
+  border-color: var(--line-strong);
+  background: var(--card);
+  box-shadow: var(--shadow-flat);
+  color: var(--bridge-700);
+  font-weight: 600;
+  padding: 8px 14px;
+}
+.pill-reset[hidden] {
+  display: none;
+}
+
 .pill.is-active {
   background: var(--card);
   border-color: var(--line-strong);

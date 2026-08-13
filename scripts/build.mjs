@@ -9,6 +9,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { loadCurriculum } from "./curriculum-loader.mjs";
 import { LEGAL_PAGES, ABOUT_PAGE } from "../content/legal.mjs";
@@ -34,6 +35,15 @@ export const SITE = {
 /* -------------------------------------------------------------------------- */
 /* helpers                                                                     */
 /* -------------------------------------------------------------------------- */
+
+/**
+ * Asset URLs, rewritten in main() to include a content hash.
+ *
+ * Without this, a deploy ships new HTML while returning visitors keep a cached
+ * app.js for up to an hour, so the page runs old JavaScript against new markup
+ * and features appear broken. Hashed names make every change a new URL.
+ */
+const ASSETS = { css: "/assets/styles.css", js: "/assets/app.js" };
 
 /** Small counts read better spelled out in headings. */
 const COUNT_WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven"];
@@ -164,7 +174,7 @@ ${canonical ? `<link rel="canonical" href="${SITE.url}${canonical}">` : ""}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/styles.css">
+<link rel="stylesheet" href="${ASSETS.css}">
 ${extraHead}
 </head>
 <body>
@@ -229,7 +239,7 @@ ${body}
     </div>
   </div>
 </footer>
-<script src="/assets/app.js" defer></script>
+<script src="${ASSETS.js}" defer></script>
 </body>
 </html>`;
 }
@@ -824,6 +834,14 @@ async function main() {
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.mkdirSync(OUT, { recursive: true });
 
+  // Hash the assets before rendering any page, so every href points at the
+  // content-addressed filename.
+  const hash = (buf) => crypto.createHash("sha256").update(buf).digest("hex").slice(0, 10);
+  const cssRaw = fs.readFileSync(path.join(ROOT, "assets", "styles.css"));
+  const jsRaw = fs.readFileSync(path.join(ROOT, "assets", "app.js"));
+  ASSETS.css = `/assets/styles.${hash(cssRaw)}.css`;
+  ASSETS.js = `/assets/app.${hash(jsRaw)}.js`;
+
   writePage("", homePage(courses, topics, videos));
   writePage("courses", coursesPage(courses, topics));
   for (const course of courses) {
@@ -839,8 +857,13 @@ async function main() {
   }
   fs.writeFileSync(path.join(OUT, "404.html"), notFoundPage());
 
-  // Static assets
+  // Static assets, written under their hashed names. Anything else in
+  // assets/ is copied through unchanged.
   copyDir(path.join(ROOT, "assets"), path.join(OUT, "assets"));
+  fs.rmSync(path.join(OUT, "assets", "styles.css"), { force: true });
+  fs.rmSync(path.join(OUT, "assets", "app.js"), { force: true });
+  fs.writeFileSync(path.join(OUT, "assets", path.basename(ASSETS.css)), cssRaw);
+  fs.writeFileSync(path.join(OUT, "assets", path.basename(ASSETS.js)), jsRaw);
 
   // Search index consumed by the saved page to rebuild cards client-side.
   const index = topics.map((t) => ({

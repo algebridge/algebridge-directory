@@ -20,9 +20,9 @@ const OUT = path.join(ROOT, "dist");
 export const SITE = {
   name: "Algebridge Directory",
   short: "Directory",
-  tagline: "Every topic from Pre-Algebra to Algebra 2, explained twice.",
+  tagline: "Every topic from Pre-Algebra through Algebra 2, explained twice.",
   description:
-    "A free directory of every Pre-Algebra, Algebra 1 and Algebra 2 topic. Each one has a hand-picked video, a plain-English explanation, a rigorous explanation, a worked example, and unlimited practice on AlgeBridge.",
+    "A free directory of every Pre-Algebra, Algebra 1, Geometry and Algebra 2 topic. Each one has a hand-picked video, a plain-English explanation, a rigorous explanation, a worked example, and unlimited practice on AlgeBridge.",
   url: "https://algebridge-directory.vercel.app",
   practiceBase: "https://algebridge.vercel.app",
   org: "AlgeBridge",
@@ -34,6 +34,9 @@ export const SITE = {
 /* -------------------------------------------------------------------------- */
 /* helpers                                                                     */
 /* -------------------------------------------------------------------------- */
+
+/** Small counts read better spelled out in headings. */
+const COUNT_WORDS = ["no", "one", "two", "three", "four", "five", "six", "seven"];
 
 const esc = (s = "") =>
   String(s)
@@ -124,6 +127,13 @@ const icon = {
 /* layout                                                                      */
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Set once in main() so the footer's course list follows the curriculum
+ * instead of being hand-maintained. Adding a course file is then the only
+ * edit needed to add a course.
+ */
+let courseNav = [];
+
 function layout({ title, description, body, active = "", canonical = "", extraHead = "" }) {
   const fullTitle = title === SITE.name ? title : `${title} — ${SITE.name}`;
   // Browse and Courses are hidden on narrow screens: both are reachable from
@@ -180,14 +190,14 @@ ${body}
     <div class="footer-grid">
       <div class="footer-about">
         <a class="brand" href="/">${icon.logo}<span>Algebridge Directory</span></a>
-        <p>A free directory of every topic from Pre-Algebra through Algebra 2. Built alongside <a href="${SITE.orgUrl}">${SITE.org}</a>, a student-led initiative.</p>
+        <p>A free directory of every topic from Pre-Algebra through Algebra 2, Geometry included. Built alongside <a href="${SITE.orgUrl}">${SITE.org}</a>, a student-led initiative.</p>
       </div>
       <div>
         <h4>Courses</h4>
         <ul>
-          <li><a href="/pre-algebra/">Pre-Algebra</a></li>
-          <li><a href="/algebra-1/">Algebra 1</a></li>
-          <li><a href="/algebra-2/">Algebra 2</a></li>
+          ${courseNav
+            .map((c) => `<li><a href="/${c.id}/">${esc(c.title)}</a></li>`)
+            .join("\n          ")}
           <li><a href="/courses/">All courses</a></li>
         </ul>
       </div>
@@ -272,7 +282,7 @@ function topicCard(topic, video) {
 </article>`;
 }
 
-function finderBar(courses, { activeCourse = "all" } = {}) {
+function finderBar(courses, { activeCourse = "all", topicCount = 0 } = {}) {
   const pill = (value, label) =>
     `<button class="pill${value === activeCourse ? " is-active" : ""}" type="button" data-filter-course="${value}">${esc(
       label
@@ -281,7 +291,7 @@ function finderBar(courses, { activeCourse = "all" } = {}) {
   <label class="search-box">
     <span class="sr-only">Search topics</span>
     ${icon.search}
-    <input type="search" id="topic-search" placeholder="Search 130 topics — try &quot;factoring&quot; or &quot;slope&quot;" autocomplete="off">
+    <input type="search" id="topic-search" placeholder="Search ${topicCount} topics — try &quot;factoring&quot; or &quot;proof&quot;" autocomplete="off">
   </label>
   <div class="pill-row" role="group" aria-label="Filter by course">
     ${pill("all", "All")}
@@ -317,8 +327,8 @@ function homePage(courses, topics, videos) {
   <section class="hero">
     <div class="hero-inner">
       <div>
-        <h1>Every algebra topic,<br>explained two ways</h1>
-        <p class="lede">Pre-Algebra through Algebra 2. Each topic has a hand-picked video, a plain-English explanation, a rigorous one, a worked example, and unlimited practice problems.</p>
+        <h1>Every algebra and geometry topic,<br>explained two ways</h1>
+        <p class="lede">Pre-Algebra, Algebra 1, Geometry and Algebra 2. Each topic has a hand-picked video, a plain-English explanation, a rigorous one, a worked example, and unlimited practice problems.</p>
         <p class="hero-note">${topics.length} topics · ${withVideo} verified videos · free, no account needed</p>
       </div>
       <div class="stat-block">
@@ -327,7 +337,7 @@ function homePage(courses, topics, videos) {
         <span class="stat-sub">across ${courses.length} courses</span>
       </div>
     </div>
-    ${finderBar(courses)}
+    ${finderBar(courses, { topicCount: topics.length })}
     ${stripNav(courses)}
   </section>
 
@@ -373,7 +383,7 @@ function homePage(courses, topics, videos) {
 function coursesPage(courses, topics) {
   const body = `<div class="wrap">
   <div class="breadcrumb"><a href="/">Directory</a><span aria-hidden="true">/</span><span>Courses</span></div>
-  <h1 class="detail-title">Three courses, ${topics.length} topics</h1>
+  <h1 class="detail-title">${COUNT_WORDS[courses.length] || courses.length} courses, ${topics.length} topics</h1>
   <p class="detail-lede">Work through a course in order, or jump to whatever is confusing right now. Nothing is locked and no account is required.</p>
   <div class="card-grid" style="margin-top:22px">
     ${courses
@@ -395,7 +405,7 @@ function coursesPage(courses, topics) {
 </div>`;
   return layout({
     title: "Courses",
-    description: `All ${topics.length} topics across Pre-Algebra, Algebra 1 and Algebra 2.`,
+    description: `All ${topics.length} topics across ${courses.map((c) => c.title).join(", ")}.`,
     body,
     active: "courses",
     canonical: "/courses/",
@@ -781,6 +791,7 @@ function copyDir(from, to) {
 async function main() {
   const { courses, topics } = await loadCurriculum(ROOT);
   const videos = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "videos.json"), "utf8"));
+  courseNav = courses;
 
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.mkdirSync(OUT, { recursive: true });

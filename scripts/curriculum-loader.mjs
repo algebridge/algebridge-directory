@@ -8,7 +8,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
-const COURSE_FILES = ["pre-algebra.mjs", "algebra-1.mjs", "algebra-2.mjs"];
+// Order here is the order courses appear across the site. Geometry sits
+// between Algebra 1 and Algebra 2, matching the standard US sequence.
+const COURSE_FILES = ["pre-algebra.mjs", "algebra-1.mjs", "geometry.mjs", "algebra-2.mjs"];
 
 export async function loadCurriculum(root) {
   const courses = [];

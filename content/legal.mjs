@@ -19,7 +19,7 @@ const notice = () => (SHOW_DRAFT_NOTICE ? DRAFT_NOTICE : "");
 
 export const ABOUT_PAGE = {
   html: `
-<p>The Algebridge Directory covers every topic taught from Pre-Algebra through Algebra 2, free and open to anyone. It exists because the hardest part of getting unstuck in maths is usually not the maths. It is finding one clear explanation of the exact thing that is confusing, without wading through a forty-minute lecture or a page of adverts.</p>
+<p>The Algebridge Directory covers every topic taught from Pre-Algebra through Algebra 2 — Algebra 1, Geometry and Algebra 2 included — free and open to anyone. It exists because the hardest part of getting unstuck in maths is usually not the maths. It is finding one clear explanation of the exact thing that is confusing, without wading through a forty-minute lecture or a page of adverts.</p>
 
 <h2>Two explanations for every topic</h2>
 <p>Each topic carries both a plain-language explanation and a rigorous one, and you can switch between them on any page.</p>
@@ -56,7 +56,7 @@ ${notice()}
 <p>These Terms of Service (the “Terms”) govern your access to and use of the Algebridge Directory at this website (the “Directory”). The Directory is operated by AlgeBridge, a student-led educational initiative (“we”, “us”). By using the Directory you agree to these Terms. If you do not agree, please do not use the Directory.</p>
 
 <h2>1. What the Directory is</h2>
-<p>The Directory is a free, publicly available catalogue of mathematics topics covering Pre-Algebra, Algebra 1 and Algebra 2. Each topic page contains written explanations, a worked example, a list of common mistakes, an embedded third-party video, and a link to a separate practice platform.</p>
+<p>The Directory is a free, publicly available catalogue of mathematics topics covering Pre-Algebra, Algebra 1, Geometry and Algebra 2. Each topic page contains written explanations, a worked example, a list of common mistakes, an embedded third-party video, and a link to a separate practice platform.</p>
 <p>The Directory is an educational reference. It is not a school, not a tutoring service, not a certification programme, and not a substitute for instruction from a qualified teacher.</p>
 
 <h2>2. No account, no charge</h2>

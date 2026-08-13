@@ -1,16 +1,16 @@
 # Algebridge Directory
 
-A free directory of every topic from Pre-Algebra through Algebra 2. Each topic has a
+A free directory of every topic from Pre-Algebra through Algebra 2, Geometry included. Each topic has a
 hand-picked video, a plain-English explanation, a rigorous explanation, a worked example,
 a list of the mistakes that actually cost marks, and a link to unlimited practice on
 [AlgeBridge](https://algebridge.vercel.app).
 
-**130 topics · 3 courses · 130 verified videos · 43 practice deep links**
+**173 topics · 4 courses · 173 verified videos · 65 topics with practice deep links**
 
-| | Pre-Algebra | Algebra 1 | Algebra 2 |
-|---|---|---|---|
-| Units | 7 | 9 | 9 |
-| Topics | 48 | 46 | 36 |
+| | Pre-Algebra | Algebra 1 | Geometry | Algebra 2 |
+|---|---|---|---|---|
+| Units | 7 | 9 | 7 | 9 |
+| Topics | 48 | 46 | 43 | 36 |
 
 ## Before this goes public
 
@@ -35,13 +35,14 @@ Once those are set, flip `SHOW_DRAFT_NOTICE` to `false` at the top of
 ## How it works
 
 No framework and no dependencies. `scripts/build.mjs` reads the curriculum, merges in the
-verified video data and writes 144 static HTML pages. Every topic is a real page, so the
+verified video data and writes 188 static HTML pages. Every topic is a real page, so the
 content is indexable rather than hidden behind a client-side router.
 
 ```
 data/
   pre-algebra.mjs     curriculum: units → topics → both explanations, example, mistakes
-  algebra-1.mjs
+  algebra-1.mjs       (course order is set in scripts/curriculum-loader.mjs)
+  geometry.mjs
   algebra-2.mjs
   videos.json         generated — one verified YouTube video per topic
 content/
@@ -78,16 +79,16 @@ lying. No video ID is ever written by hand or guessed. For each topic,
 4. Caches the result, with channel, title, duration and verification date.
 
 A topic with no trusted match is left **without** a video rather than filled with a random
-result. Currently all 130 topics have one. The current spread:
+result. Currently all 173 topics have one. The current spread:
 
 | Channel | Videos |
 |---|---|
-| Khan Academy | 66 |
-| The Organic Chemistry Tutor | 46 |
+| Khan Academy | 78 |
+| The Organic Chemistry Tutor | 69 |
+| Mario's Math Tutoring | 11 |
 | Math with Mr. J | 9 |
-| Mario's Math Tutoring | 5 |
-| Professor Dave Explains | 3 |
-| Brian McLogan | 1 |
+| Professor Dave Explains | 4 |
+| Brian McLogan | 2 |
 
 Videos are embedded via `youtube-nocookie.com`, credited by channel name under every
 player, and linked back to the original. Nothing is hosted, re-uploaded or monetised.
@@ -96,9 +97,9 @@ player, and linked back to the original. Nothing is hosted, re-uploaded or monet
 
 `npm run verify` gates a deploy on five checks:
 
-- every internal link resolves to a page that exists (5,305 links)
+- every internal link resolves to a page that exists (7,169 links)
 - no unrendered `~maths~` markup or template leaks reached the HTML
-- all 130 topic pages contain both explanations, the example, the mistakes and the CTA
+- all 173 topic pages contain both explanations, the example, the mistakes and the CTA
 - every video ID is well formed and carries channel attribution
 - every practice deep link returns 200 on the live AlgeBridge platform (43 links)
 
@@ -106,7 +107,7 @@ player, and linked back to the original. Nothing is hosted, re-uploaded or monet
 
 Topics deep-link to the exact matching skill where AlgeBridge has one:
 `algebridge.vercel.app/learn/{unitId}/{skillId}`. AlgeBridge currently has 13 units and
-46 skills, all Algebra 1 shaped, so 43 of the 130 topics deep-link and the rest open the
+46 skills, all Algebra 1 shaped, so 65 of the 173 topics deep-link and the rest open the
 platform's front page. Those pages say so rather than implying a link that does not
 exist. Adding skills to AlgeBridge is what closes the gap — the mapping lives in the
 `practice` field of each topic.

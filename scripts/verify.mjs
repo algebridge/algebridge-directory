@@ -80,6 +80,22 @@ async function main() {
   }
   console.log("✓ no unrendered markup");
 
+  /* -- 2b. the [hidden] override -------------------------------------------- */
+  // Filtering sets element.hidden. That only works if the stylesheet forces
+  // display:none, because .topic-card's own `display: flex` outranks the
+  // user-agent [hidden] rule. Without this, filters update the count while
+  // every card stays on screen.
+  const cssFile = files.find((f) => /assets[/\\]styles\.[a-f0-9]+\.css$/.test(f));
+  if (!cssFile) {
+    fail("No hashed stylesheet found in dist/assets");
+  } else {
+    const css = fs.readFileSync(cssFile, "utf8").replace(/\s+/g, " ");
+    if (!/\[hidden\] *\{ *display: *none *!important/.test(css)) {
+      fail("styles.css is missing the [hidden] { display: none !important } rule — filtered cards will stay visible");
+    }
+  }
+  console.log("✓ [hidden] override present");
+
   /* -- 3. topic page completeness ------------------------------------------ */
   for (const topic of topics) {
     const file = path.join(OUT, "topic", topic.slug, "index.html");

@@ -1,0 +1,17 @@
+{
+  "name": "algebridge-library",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A free directory of every Pre-Algebra, Algebra 1 and Algebra 2 topic, each with a verified video, two explanations, a worked example and unlimited practice.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "verify": "node scripts/verify.mjs",
+    "videos": "node scripts/fetch-videos.mjs",
+    "videos:recheck": "node scripts/fetch-videos.mjs --recheck",
+    "dev": "node scripts/build.mjs && npx --yes serve dist -l 4810"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
